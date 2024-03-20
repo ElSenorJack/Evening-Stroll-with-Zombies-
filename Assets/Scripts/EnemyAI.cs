@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float chaseRange = 5f;
 
     NavMeshAgent navMeshAgent;
-    float distanceTotarget = Mathf.Infinity; 
+    float distanceToTarget = Mathf.Infinity;
+    bool isProvoked = false;
 
     void Start()
     {
@@ -18,12 +20,46 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        distanceTotarget = Vector3.Distance(target.position, transform.position);
-        if (distanceTotarget <= chaseRange)
+        distanceToTarget = Vector3.Distance(target.position, transform.position);
+        if (isProvoked)
         {
-           navMeshAgent.SetDestination(target.position);
+            EngageTarget();
+        }
+        else if(distanceToTarget <= chaseRange)
+        {
+            isProvoked = true;
         }
     }
+
+    void EngageTarget() 
+    {
+        if (distanceToTarget >= navMeshAgent.stoppingDistance)
+        {
+            ChaseTarget();
+        }
+
+        if (distanceToTarget <= navMeshAgent.stoppingDistance)
+        {
+            AttackTarget();
+        }
+    }
+
+    void AttackTarget()
+    {
+        Debug.Log(name + "has seeked and attacking" + target.name);
+    }
+
+    void ChaseTarget()
+    {
+        navMeshAgent.SetDestination(target.position);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, chaseRange);
+    }
+
 }
 
 
