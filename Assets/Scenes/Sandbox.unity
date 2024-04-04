@@ -3028,10 +3028,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1107980081}
   - {fileID: 575170401}
   - {fileID: 1604454890}
   - {fileID: 1940962668}
-  - {fileID: 1107980081}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1604454889
@@ -3428,7 +3428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a855db3a9aec648a4d03ef7e97478f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 5
 --- !u!1 &1820065494 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8345070699613760942, guid: 09aade0ecefd01e4b8f7661acf64f5c2, type: 3}
@@ -3701,6 +3701,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2585446675128513164, guid: 2f09c798375f9be42b237b8d550affbe, type: 3}
+      propertyPath: gameoverCanvas
+      value: 
+      objectReference: {fileID: 1107980084}
     - target: {fileID: 8240499484511031256, guid: 2f09c798375f9be42b237b8d550affbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.33

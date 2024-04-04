@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     { 
+        BroadcastMessage("OnDamage", SendMessageOptions.DontRequireReceiver);
         hitPoints -= damage;
         if (hitPoints <= 0)
         { 
