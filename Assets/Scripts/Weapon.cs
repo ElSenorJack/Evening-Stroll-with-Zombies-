@@ -10,8 +10,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] float range = 100f;
     [SerializeField] float damage = 20f;
     [SerializeField] ParticleSystem muzzleFlash;
-    [SerializeField] GameObject hitHole;
+    //[SerializeField] GameObject hitHole;
     [SerializeField] GameObject hitSparks;
+    [SerializeField] Ammo ammoSlot;
 
 
     void Update()
@@ -22,8 +23,12 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
-        Raycasting();
-        PlayMuzzleFlash();
+        if (ammoSlot.CurrentAmmo() > 0)
+        {
+            PlayMuzzleFlash();
+            Raycasting();
+            ammoSlot.ConsumeAmmo();
+        }
     }
 
     private void PlayMuzzleFlash()
@@ -48,7 +53,7 @@ public class Weapon : MonoBehaviour
     {
        GameObject impactSparks = Instantiate(hitSparks, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(impactSparks, 1);
-       GameObject impactHole = Instantiate(hitHole, hit.point, Quaternion.LookRotation(hit.normal));
-        Destroy(impactHole, 3);
+       //GameObject impactHole = Instantiate(hitHole, hit.point, Quaternion.LookRotation(hit.normal));
+       //Destroy(impactHole, 3);
     }
 }
