@@ -15,10 +15,16 @@ public class Weapon : MonoBehaviour
     [SerializeField] Ammo ammoSlot;
     [SerializeField] float shotsDelay = 0f;
     [SerializeField] int ammoConsume = 1;
+    [SerializeField] AmmoType ammoType;
     [SerializeField] bool fullAuto = false;
     //[SerializeField] bool burstShot = false;
 
     bool canShoot = true;
+
+    private void OnEnable()
+    {
+        canShoot = true; 
+    }
 
     void Update()
     {
@@ -31,18 +37,18 @@ public class Weapon : MonoBehaviour
     IEnumerator Shoot()
     {
         canShoot = false;
-        if (ammoSlot.CurrentAmmo() > 0)
+        if (ammoSlot.CurrentAmmo(ammoType) > 0)
         {
             PlayMuzzleFlash();
             Raycasting();
-            ammoSlot.ConsumeAmmo(ammoConsume);
+            ammoSlot.ConsumeAmmo(ammoType);
         }
         yield return new WaitForSeconds(shotsDelay);
         canShoot = true;
 
         if (Input.GetMouseButton(0) && fullAuto == true && canShoot == true)
         {
-            StartCoroutine(Shoot());    
+            StartCoroutine(Shoot());
         }
     }
 

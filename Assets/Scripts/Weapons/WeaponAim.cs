@@ -26,16 +26,26 @@ public class WeaponAim : MonoBehaviour
         {
             if (onAim == false)
             {
-                onAim = true;
-                fpsCamera.m_Lens.FieldOfView = aimFOV;
-                fpsController.RotationSpeed = aimSensitivity;
-            }            
+                ZoomIn();
+            }
         }
         else if (Input.GetMouseButtonUp(1))
         {
-            onAim = false;
-            fpsCamera.m_Lens.FieldOfView = defaultFOV;
-            fpsController.RotationSpeed = defaultSensitivity;
+            ZoomOut();
         }
+    }
+
+    private void ZoomOut()
+    {
+        onAim = false;
+        fpsCamera.m_Lens.FieldOfView = defaultFOV;
+        fpsController.RotationSpeed = defaultSensitivity;
+    }
+
+    private void ZoomIn()
+    {
+        onAim = true;
+        fpsCamera.m_Lens.FieldOfView = aimFOV;
+        fpsController.RotationSpeed = aimSensitivity;
     }
 }
