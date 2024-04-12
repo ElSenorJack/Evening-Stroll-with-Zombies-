@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4819501579468060}
@@ -102,9 +102,11 @@ MonoBehaviour:
   range: 100
   damage: 20
   muzzleFlash: {fileID: 4225968719339204555, guid: 52e7125dbacb16b4eb076bc06989380d, type: 3}
-  hitHole: {fileID: 0}
   hitSparks: {fileID: 4266818511972802402, guid: 66dd822c0e2fd5a488d9166538810aee, type: 3}
   ammoSlot: {fileID: 0}
+  shotsDelay: 0
+  ammoConsume: 1
+  fullAuto: 0
 --- !u!1 &1326079549577358
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,15 +6,14 @@ public class Ammo : MonoBehaviour
 {
     [SerializeField] int ammoAmount = 10;
 
-
     public int CurrentAmmo()
     {
         return ammoAmount;
     }
 
-    public void ConsumeAmmo()
+    public void ConsumeAmmo(int i)
     {
-        ammoAmount--;
+        ammoAmount -= i;
     }
 
 }
