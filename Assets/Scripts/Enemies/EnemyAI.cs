@@ -10,18 +10,31 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float chaseRange = 5f;
     [SerializeField] float turnSpeed = 5f;
 
+    EnemyHealth health;
     NavMeshAgent navMeshAgent;
+    Collider collider;
+
     float distanceToTarget = Mathf.Infinity;
     bool isProvoked = false;
-
+    
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        health = GetComponent<EnemyHealth>();
+        collider = GetComponent<Collider>();
     }
 
     void Update()
     {
+        if (health.IsDead())
+        { 
+            enabled = false;
+            navMeshAgent.enabled = false;
+            collider.enabled = false;
+        }
+
         distanceToTarget = Vector3.Distance(target.position, transform.position);
+
         if (isProvoked)
         {
             EngageTarget();
