@@ -76,7 +76,5 @@ public class WeaponChanger : MonoBehaviour
         { currentWeapon = 1; }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         { currentWeapon = 2; }
-        if (Input.GetKeyDown (KeyCode.Alpha4))
-        { currentWeapon = 3; }
     }
 }

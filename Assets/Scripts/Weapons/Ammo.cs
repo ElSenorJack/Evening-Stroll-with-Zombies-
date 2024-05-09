@@ -5,9 +5,10 @@ using UnityEngine;
 public class Ammo : MonoBehaviour
 {
     [SerializeField] AmmoSlot[] ammoSlots;
+    Weapon weapon;
     
     [System.Serializable]
-    private class AmmoSlot
+    public class AmmoSlot
     {
         public AmmoType ammoType;
         public int ammoAmount;
@@ -19,7 +20,7 @@ public class Ammo : MonoBehaviour
 
     public void ConsumeAmmo(AmmoType ammoType)
     {
-        GetAmmoSlot(ammoType).ammoAmount--;
+        GetAmmoSlot(ammoType).ammoAmount -= weapon.clipSize;
     }
 
     public void GrabAmmo(AmmoType ammoType, int ammoAmount)
