@@ -12,22 +12,21 @@ public class Weapon : MonoBehaviour
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] GameObject hitSparks;
     [SerializeField] Ammo ammoSlot;
-    [SerializeField] public int clipSize;
     [SerializeField] float shotsDelay = 0f;
-    [SerializeField] int ammoConsume = 1;
     [SerializeField] AmmoType ammoType;
     [SerializeField] bool fullAuto = false;
-    public int clip;
+    public int clipSize;
+    int clip;
     public Animator animator;
     private bool isReloading = false;
 
     bool canShoot = true;
 
-    public void Start()
+    private void Start()
     {
         clip = clipSize;
+        
     }
-
     private void OnEnable()
     {
         canShoot = true;
@@ -47,16 +46,14 @@ public class Weapon : MonoBehaviour
         if (clip <= 0)
         {
             StartCoroutine(Reload());
-            clip += clipSize;
-            ammoSlot.ConsumeAmmo(ammoType);            
-            canShoot = true;
+            
         }
     }
 
     IEnumerator Shoot()
     {
         canShoot = false;
-        if (ammoSlot.CurrentAmmo(ammoType) > 0)
+        if (clip > 0)
         {
             PlayMuzzleFlash();
             Raycasting();
@@ -78,6 +75,9 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(2f);
         animator.SetBool("Reloading", false);
         isReloading = false;
+        clip += clipSize;
+        FindObjectOfType<Ammo>().ConsumeAmmo(ammoType, clipSize);
+        canShoot = true;
     }
 
     private void PlayMuzzleFlash()

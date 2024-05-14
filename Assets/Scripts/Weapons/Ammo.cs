@@ -18,9 +18,9 @@ public class Ammo : MonoBehaviour
         return GetAmmoSlot(ammoType).ammoAmount;
     }
 
-    public void ConsumeAmmo(AmmoType ammoType)
+    public void ConsumeAmmo(AmmoType ammoType, int clipSize)
     {
-        GetAmmoSlot(ammoType).ammoAmount -= weapon.clipSize;
+        GetAmmoSlot(ammoType).ammoAmount -= clipSize;
     }
 
     public void GrabAmmo(AmmoType ammoType, int ammoAmount)
