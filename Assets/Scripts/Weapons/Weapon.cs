@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] float shotsDelay = 0f;
     [SerializeField] AmmoType ammoType;
     [SerializeField] bool fullAuto = false;
+    float headshot;
     public int clipSize;
     int clip;
     public Animator animator;
@@ -25,7 +26,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         clip = clipSize;
-        
+        headshot = damage * 2;
     }
     private void OnEnable()
     {
@@ -43,10 +44,9 @@ public class Weapon : MonoBehaviour
             StartCoroutine(Shoot());
         }
 
-        if (clip <= 0)
+        if (clip <= 0 && ammoSlot.CurrentAmmo(ammoType) > 0)
         {
-            StartCoroutine(Reload());
-            
+            StartCoroutine(Reload());           
         }
     }
 
@@ -70,14 +70,28 @@ public class Weapon : MonoBehaviour
 
     public IEnumerator Reload()
     {
-        isReloading = true;
-        animator.SetBool("Reloading", true);
-        yield return new WaitForSeconds(2f);
-        animator.SetBool("Reloading", false);
-        isReloading = false;
-        clip += clipSize;
-        FindObjectOfType<Ammo>().ConsumeAmmo(ammoType, clipSize);
-        canShoot = true;
+        if (ammoSlot.CurrentAmmo(ammoType) > clipSize)
+        {
+            isReloading = true;
+            animator.SetBool("Reloading", true);
+            yield return new WaitForSeconds(2f);
+            animator.SetBool("Reloading", false);
+            isReloading = false;
+            clip += clipSize;
+            FindObjectOfType<Ammo>().ConsumeAmmo(ammoType, clipSize);
+            canShoot = true;
+        }
+        else if (ammoSlot.CurrentAmmo(ammoType) < clipSize)
+        {
+            isReloading = true;
+            animator.SetBool("Reloading", true);
+            yield return new WaitForSeconds(2f);
+            animator.SetBool("Reloading", false);
+            isReloading = false;
+            clip += ammoSlot.CurrentAmmo(ammoType);
+            FindObjectOfType<Ammo>().ConsumeAmmo(ammoType, ammoSlot.CurrentAmmo(ammoType));
+            canShoot = true;
+        }
     }
 
     private void PlayMuzzleFlash()
