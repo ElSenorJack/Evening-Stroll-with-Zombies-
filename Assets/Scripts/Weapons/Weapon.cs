@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] float shotsDelay = 0f;
     [SerializeField] AmmoType ammoType;
     [SerializeField] bool fullAuto = false;
+    [SerializeField] TextMeshProUGUI ammoText;
     float headshot;
     public int clipSize;
     int clip;
@@ -37,6 +39,7 @@ public class Weapon : MonoBehaviour
 
     public void Update()
     {
+        DisplayAmmo();
         if (isReloading) return;
         
         if (Input.GetMouseButtonDown(0) && canShoot == true)
@@ -48,6 +51,12 @@ public class Weapon : MonoBehaviour
         {
             StartCoroutine(Reload());           
         }
+    }
+
+    public void DisplayAmmo()
+    {
+        int currentAmmo = ammoSlot.CurrentAmmo(ammoType);
+        ammoText.text = clip + " 1 " + currentAmmo.ToString();
     }
 
     IEnumerator Shoot()
