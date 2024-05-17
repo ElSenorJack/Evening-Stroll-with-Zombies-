@@ -106,8 +106,10 @@ public class Weapon : MonoBehaviour
         {
             ImpactHit(hit);
             EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
-            if (target == null) { return; }
-            target.TakeDamage(damage);
+            Headshot head = hit.transform.GetComponent<Headshot>();
+            if (target != null) { target.TakeDamage(damage); }
+
+            if (head != null) head.HeadDamage(headshot);
         }
         else { return; }
     }

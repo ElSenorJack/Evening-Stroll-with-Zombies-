@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] float hitPoints = 100f;
+    [SerializeField] public float hitPoints = 100f;
 
     bool isDead = false;
 
-    public bool IsDead()
-    { return isDead; }
+    public bool IsDead()  { return isDead; }
     public void TakeDamage(float damage)
     {
         BroadcastMessage("OnDamage", SendMessageOptions.DontRequireReceiver);
@@ -20,7 +19,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private void Death()
+    public void Death()
     {
         if (isDead) return;
         isDead = true;
