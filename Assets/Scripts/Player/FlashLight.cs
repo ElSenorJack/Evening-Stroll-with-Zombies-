@@ -37,6 +37,10 @@ public class FlashLight : MonoBehaviour
     private void DecreaseLightAngle()
     {
         if (myLight.spotAngle <= minimunAngle) { return; }
-        else { myLight.spotAngle -= angleDim * Time.deltaTime; }
+        else 
+        { 
+            myLight.spotAngle -= angleDim * Time.deltaTime;
+            myLight.innerSpotAngle -= angleDim * Time.deltaTime;
+        }
     }
 }

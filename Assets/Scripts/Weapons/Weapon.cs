@@ -56,7 +56,7 @@ public class Weapon : MonoBehaviour
     public void DisplayAmmo()
     {
         int currentAmmo = ammoSlot.CurrentAmmo(ammoType);
-        ammoText.text = clip + " 1 " + currentAmmo.ToString();
+        ammoText.text = clip + " 1 " + currentAmmo.ToString(); //1 looks like "/" with the font used
     }
 
     IEnumerator Shoot()
@@ -79,7 +79,7 @@ public class Weapon : MonoBehaviour
 
     public IEnumerator Reload()
     {
-        if (ammoSlot.CurrentAmmo(ammoType) > clipSize)
+        if (ammoSlot.CurrentAmmo(ammoType) >= clipSize)
         {
             isReloading = true;
             animator.SetBool("Reloading", true);

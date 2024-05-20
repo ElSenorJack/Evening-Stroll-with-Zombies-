@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] public float hitPoints = 100f;
-
     bool isDead = false;
 
     public bool IsDead()  { return isDead; }
@@ -24,6 +23,8 @@ public class EnemyHealth : MonoBehaviour
         if (isDead) return;
         isDead = true;
         GetComponent<Animator>().SetTrigger("die");
+        GetComponent<Collider>().enabled = false;
+        GetComponentInChildren<Collider>().enabled = false;
     }
 
 }
