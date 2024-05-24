@@ -756,7 +756,7 @@ PrefabInstance:
       objectReference: {fileID: 9030347794799753044}
     - target: {fileID: 1909442501933037810, guid: d79d1b0d45b50944f94df96107c6189e, type: 3}
       propertyPath: clipSize
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1909442501933037810, guid: d79d1b0d45b50944f94df96107c6189e, type: 3}
       propertyPath: hitSparks
@@ -1478,7 +1478,7 @@ PrefabInstance:
       objectReference: {fileID: 9030347794799753044}
     - target: {fileID: 615754581227601242, guid: cacbe2b2583780640866ae66014ecbde, type: 3}
       propertyPath: clipSize
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 615754581227601242, guid: cacbe2b2583780640866ae66014ecbde, type: 3}
       propertyPath: fullAuto
@@ -1967,7 +1967,7 @@ PrefabInstance:
       objectReference: {fileID: 9030347794799753044}
     - target: {fileID: 1499231268807219601, guid: 00c38e9f10973f140890bd61802020f6, type: 3}
       propertyPath: clipSize
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1499231268807219601, guid: 00c38e9f10973f140890bd61802020f6, type: 3}
       propertyPath: shotsDelay

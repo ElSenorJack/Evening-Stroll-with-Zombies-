@@ -23,6 +23,7 @@ public class Weapon : MonoBehaviour
     float headshot;
     public int clipSize;
     int clip;
+    int clipMissing;
     public Animator animator;
     private bool isReloading = false;
 
@@ -42,7 +43,7 @@ public class Weapon : MonoBehaviour
     }
 
     public void Update()
-    {
+    {        
         DisplayAmmo();
         if (isReloading) return;
         
@@ -54,6 +55,11 @@ public class Weapon : MonoBehaviour
         if (clip <= 0 && ammoSlot.CurrentAmmo(ammoType) > 0)
         {
             StartCoroutine(Reload());           
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && clip < clipSize) 
+        { 
+            StartCoroutine(Reload());
         }
     }
 
@@ -84,11 +90,11 @@ public class Weapon : MonoBehaviour
 
     public IEnumerator Reload()
     {
-        if (ammoSlot.CurrentAmmo(ammoType) >= clipSize)
+        if (ammoSlot.CurrentAmmo(ammoType) >= clipSize && clip == 0)
         {
-            isReloading = true;
-            audio.PlayOneShot (reload);
+            isReloading = true;          
             animator.SetBool("Reloading", true);
+            audio.PlayOneShot(reload);
             yield return new WaitForSeconds(2f);
             animator.SetBool("Reloading", false);
             isReloading = false;
@@ -96,15 +102,29 @@ public class Weapon : MonoBehaviour
             FindObjectOfType<Ammo>().ConsumeAmmo(ammoType, clipSize);
             canShoot = true;
         }
-        else if (ammoSlot.CurrentAmmo(ammoType) < clipSize)
+        if (ammoSlot.CurrentAmmo(ammoType) < clipSize && clip == 0)
         {
             isReloading = true;
             animator.SetBool("Reloading", true);
+            audio.PlayOneShot(reload);
             yield return new WaitForSeconds(2f);
             animator.SetBool("Reloading", false);
             isReloading = false;
             clip += ammoSlot.CurrentAmmo(ammoType);
             FindObjectOfType<Ammo>().ConsumeAmmo(ammoType, ammoSlot.CurrentAmmo(ammoType));
+            canShoot = true;
+        }
+        if (clip <= clipSize)
+        {
+            var clipMissing = clipSize - clip;
+            isReloading = true;
+            animator.SetBool("Reloading", true);
+            yield return new WaitForSeconds(2f);
+            audio.PlayOneShot(reload);
+            animator.SetBool("Reloading", false);
+            isReloading = false;
+            clip += clipMissing;
+            FindObjectOfType<Ammo>().ConsumeAmmo(ammoType, clipMissing);
             canShoot = true;
         }
     }
