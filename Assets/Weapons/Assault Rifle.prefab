@@ -521,9 +521,16 @@ MonoBehaviour:
   range: 100
   damage: 20
   muzzleFlash: {fileID: 8096836738117302491, guid: 718a84225b3859f4d84c7f4a2d90ad3b, type: 3}
-  hitHole: {fileID: 0}
   hitSparks: {fileID: 3395037856597972225, guid: 75c17d600bff7b445b3fb9b537cd16a3, type: 3}
   ammoSlot: {fileID: 0}
+  shotsDelay: 0
+  ammoType: 0
+  fullAuto: 0
+  ammoText: {fileID: 0}
+  shots: {fileID: 0}
+  reload: {fileID: 0}
+  clipSize: 0
+  animator: {fileID: 0}
 --- !u!1001 &983309279153760497
 PrefabInstance:
   m_ObjectHideFlags: 0

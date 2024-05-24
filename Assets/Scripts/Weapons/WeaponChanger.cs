@@ -24,6 +24,7 @@ public class WeaponChanger : MonoBehaviour
             {
                 weapon.gameObject.SetActive(false);
             }
+
             weaponIndex++;
         }
     }
@@ -71,7 +72,7 @@ public class WeaponChanger : MonoBehaviour
     private void ProcessKeyInput()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-        { currentWeapon = 0; }
+        { currentWeapon = 0;}
         if (Input.GetKeyDown(KeyCode.Alpha2))
         { currentWeapon = 1; }
         if (Input.GetKeyDown(KeyCode.Alpha3))

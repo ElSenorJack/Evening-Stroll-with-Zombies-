@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] public float hitPoints = 100f;
-    bool isDead = false;
+    public bool isDead = false;
 
     public bool IsDead()  { return isDead; }
     public void TakeDamage(float damage)

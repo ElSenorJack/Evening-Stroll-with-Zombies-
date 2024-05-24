@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour
     Collider collider;
 
     float distanceToTarget = Mathf.Infinity;
-    bool isProvoked = false;
+    public bool isProvoked = false;
     
     void Start()
     {
@@ -75,6 +75,7 @@ public class EnemyAI : MonoBehaviour
     {
         GetComponent<Animator>().SetBool("attack", false);
         GetComponent<Animator>().SetTrigger("move");
+        isProvoked = true;
         navMeshAgent.SetDestination(target.position);
     }
 

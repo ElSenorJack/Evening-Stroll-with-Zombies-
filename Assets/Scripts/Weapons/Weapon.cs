@@ -17,6 +17,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] AmmoType ammoType;
     [SerializeField] bool fullAuto = false;
     [SerializeField] TextMeshProUGUI ammoText;
+    [SerializeField] AudioClip shots;
+    [SerializeField] AudioClip reload;
+    new AudioSource audio;
     float headshot;
     public int clipSize;
     int clip;
@@ -27,6 +30,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
+        audio = GetComponent<AudioSource>();
         clip = clipSize;
         headshot = damage * 2;
     }
@@ -64,6 +68,7 @@ public class Weapon : MonoBehaviour
         canShoot = false;
         if (clip > 0)
         {
+            audio.PlayOneShot(shots);
             PlayMuzzleFlash();
             Raycasting();
             clip--;
@@ -82,6 +87,7 @@ public class Weapon : MonoBehaviour
         if (ammoSlot.CurrentAmmo(ammoType) >= clipSize)
         {
             isReloading = true;
+            audio.PlayOneShot (reload);
             animator.SetBool("Reloading", true);
             yield return new WaitForSeconds(2f);
             animator.SetBool("Reloading", false);
