@@ -6,9 +6,12 @@ using UnityEngine;
 public class WeaponChanger : MonoBehaviour
 {
     [SerializeField] int currentWeapon = 0;
+    Ammo ammoSlot;
+    AmmoType ammoType;
     void Start()
     {
         SetWeaponActive();
+        ammoSlot = GetComponent<Ammo>();
     }
     void SetWeaponActive()
     {

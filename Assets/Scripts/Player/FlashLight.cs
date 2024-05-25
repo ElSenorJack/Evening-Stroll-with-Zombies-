@@ -8,8 +8,9 @@ public class FlashLight : MonoBehaviour
     [SerializeField] float lightDim = .1f;
     [SerializeField] float angleDim = 1f;
     [SerializeField] float minimunAngle = 10f;
-    //[SerializeField]
+
     Light myLight;
+
     void Start()
     {
         myLight = GetComponent<Light>();

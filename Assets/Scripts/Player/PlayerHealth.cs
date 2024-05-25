@@ -6,8 +6,14 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] float hitpoints = 10f;
+    [SerializeField] float maxHP = 100f;
     [SerializeField] TextMeshProUGUI health;
+    float HP;
+
+    private void Start()
+    {
+        HP = maxHP;
+    }
 
     private void Update()
     {
@@ -16,16 +22,21 @@ public class PlayerHealth : MonoBehaviour
 
     private void DisplayHealth()
     {
-        health.text = hitpoints.ToString();
+        health.text = HP.ToString();
     }
 
     public void TakeDamage(float damage)
     {
-        hitpoints -= damage;
+        HP -= damage;
 
-        if (hitpoints <= 0)
+        if (HP <= 0)
         {
             GetComponent<DeathHandler>().HandleDeath();
         }
+    }
+    public void RestoreHealth(float addHP)
+    {
+        HP += addHP;
+        if (HP > maxHP) { HP = maxHP; }
     }
 }
