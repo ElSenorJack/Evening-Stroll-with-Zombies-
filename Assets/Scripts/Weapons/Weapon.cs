@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -90,6 +89,7 @@ public class Weapon : MonoBehaviour
     public IEnumerator Reload()
     {
         var clipMissing = clipSize - clip;
+        audio.PlayOneShot(reload);
         isReloading = true;
         animator.SetBool("Reloading", true);
         yield return new WaitForSeconds(2f);
@@ -103,7 +103,6 @@ public class Weapon : MonoBehaviour
             clip += ammoSlot.CurrentAmmo(ammoType);
             FindObjectOfType<Ammo>().ConsumeAmmo(ammoType, ammoSlot.CurrentAmmo(ammoType));
         }
-        audio.PlayOneShot(reload);
         animator.SetBool("Reloading", false);
         isReloading = false;
         canShoot = true;

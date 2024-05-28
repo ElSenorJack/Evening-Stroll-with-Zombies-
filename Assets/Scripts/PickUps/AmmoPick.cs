@@ -6,7 +6,7 @@ public class AmmoPick : MonoBehaviour
 {
     [SerializeField] AmmoType ammoType;
     int minAmmoAmount = 5;
-    int maxAmmoAmount = 20;
+    int maxAmmoAmount = 25;
 
     private void OnTriggerEnter(Collider other)
     {

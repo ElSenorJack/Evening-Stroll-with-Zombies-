@@ -7,7 +7,7 @@ public class EnemySounds : MonoBehaviour
     //test #7
     public AudioSource randomGrowl;
     public AudioClip[] audioSources;
-    [SerializeField] float growlInterval = 5;
+    [SerializeField] float growlInterval = 3;
     [SerializeField] AudioClip enemyChase;
 
     new AudioSource audio;
@@ -25,7 +25,7 @@ public class EnemySounds : MonoBehaviour
     void CallAudio() 
     { 
         Invoke ("RandomGrowls", growlInterval);
-        Invoke ("ChaseGrowls", growlInterval);
+        //Invoke ("ChaseGrowls", growlInterval);
     }
 
     void RandomGrowls() 
@@ -36,11 +36,9 @@ public class EnemySounds : MonoBehaviour
         else { randomGrowl.Stop(); }
     }
 
-    void ChaseGrowls()
-    {
-        if (enemy.isProvoked == true && health.isDead == false)
-        {
-            audio.PlayOneShot(enemyChase);
-        }
-    }
+    //void ChaseGrowls()
+    //{
+     //   if (enemy.isProvoked == true)
+       // { audio.PlayOneShot(enemyChase); }
+    //}
 }
