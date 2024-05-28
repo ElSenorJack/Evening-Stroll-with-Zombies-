@@ -63,7 +63,7 @@ namespace StarterAssets
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
-		AudioListener _listener;
+		
 
 	
 #if ENABLE_INPUT_SYSTEM
@@ -101,8 +101,7 @@ namespace StarterAssets
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
-			_playerInput = GetComponent<PlayerInput>();
-			_listener = GetComponentInChildren<AudioListener>();
+			_playerInput = GetComponent<PlayerInput>();			
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
@@ -117,13 +116,8 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
-			MuteAll();
 		}
 
-		private void MuteAll()
-		{ 
-		if(Input.GetKeyDown(KeyCode.M)) { _listener.enabled = !_listener.enabled; }
-		}
 		private void LateUpdate()
 		{
 			CameraRotation();
