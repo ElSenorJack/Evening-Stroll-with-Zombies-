@@ -12,12 +12,13 @@ public class PauseGame : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         starterAssetsInputs = player.GetComponent<StarterAssets.StarterAssetsInputs>();
+        Cursor.visible = false;
         //ProcessPause();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if (!gamePaused)
             {
@@ -36,7 +37,7 @@ public class PauseGame : MonoBehaviour
         // setting cursor bool, in the starterAssetsInputs Script
         starterAssetsInputs.cursorLocked = true;
         starterAssetsInputs.cursorInputForLook = true;
-
+        Cursor.visible = false;
         starterAssetsInputs.SetCursorState(starterAssetsInputs.cursorLocked);
     }
 
@@ -45,7 +46,7 @@ public class PauseGame : MonoBehaviour
         gamePaused = true;
         starterAssetsInputs.cursorLocked = false;
         starterAssetsInputs.cursorInputForLook = false;
-
+        Cursor.visible = true;
         starterAssetsInputs.SetCursorState(starterAssetsInputs.cursorLocked);
     }
 }
