@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] float damage = 20f;
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] GameObject hitSparks;
+    [SerializeField] GameObject hitBlood;
     [SerializeField] Ammo ammoSlot;
     [SerializeField] float shotsDelay = 0f;
     [SerializeField] AmmoType ammoType;
@@ -118,12 +119,19 @@ public class Weapon : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, range))
         {
-            ImpactHit(hit);
             EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
             Headshot head = hit.transform.GetComponent<Headshot>();
-            if (target != null) { target.TakeDamage(damage); }
-
-            if (head != null) head.HeadDamage(headshot);
+            if (target != null) 
+            { 
+                target.TakeDamage(damage);
+                BloodHit(hit);
+            }
+            else if (head != null) 
+            {
+                head.HeadDamage(headshot);
+                BloodHit(hit);
+            }
+            else ImpactHit(hit);
         }
         else { return; }
     }
@@ -131,6 +139,11 @@ public class Weapon : MonoBehaviour
     private void ImpactHit(RaycastHit hit)
     {
        GameObject impactSparks = Instantiate(hitSparks, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(impactSparks, 1);
+    }
+    private void BloodHit(RaycastHit hit)
+    {
+        GameObject impactSparks = Instantiate(hitBlood, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(impactSparks, 1);
     }
 }
