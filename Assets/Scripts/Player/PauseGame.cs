@@ -39,6 +39,7 @@ public class PauseGame : MonoBehaviour
         starterAssetsInputs.cursorInputForLook = true;
         Cursor.visible = false;
         starterAssetsInputs.SetCursorState(starterAssetsInputs.cursorLocked);
+        Time.timeScale = 1;
     }
 
     private void ProcessPause()
@@ -48,5 +49,6 @@ public class PauseGame : MonoBehaviour
         starterAssetsInputs.cursorInputForLook = false;
         Cursor.visible = true;
         starterAssetsInputs.SetCursorState(starterAssetsInputs.cursorLocked);
+        Time.timeScale = 0;
     }
 }
